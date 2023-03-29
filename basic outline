@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+int main()
+{
+    if new user 
+        call makeuser
+    if old user
+        login
+}
+
+def MakeTicket
+    nature of ticket
+        1, finacial
+        2, technical
+        3, other
+        
+    please descibe your problem
+    
+    
+    ticket number assigned
+    emplyee assigned ticket
+
+def new user
+    enter username
+        Check if already in use
+    enter password
+    enter player ID
+    
+    add user to file
+    
+    1, exit program
+    2, make ticket now
+
+
+def userlogin
+
+if guest
+    1, make new ticket
+    2, check status of tickets
+
+if employee1
+    1, check assigned tickets
+        1, delete tickets
+        2, edit tickets
+    2, check guestusers
+        1,delete guestusers
+        2,edit guestusers
+
+if employee2
+    1, check assigned tickets
+        1, delete tickets
+        2, edit tickets
+    2, check guestusers
+        1,delete guestusers
+        2,edit guestusers
+        
+if owner
+    1, check tickets
+        1, delete tickets
+        2, edit tickets
+    2, check guestusers
+        1,add guestusers
+        2,delete guestusers
+        3,edit guestusers
+    3, check employees
+        1, delete employees
+        2, edit employees
+        
+        
