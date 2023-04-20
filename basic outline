@@ -2,68 +2,114 @@
 
 int main()
 {
-    if new user 
+    print("If you are a new user Press 1, if you have an account press 2")
+    user = get_int(1,2)
+    if user = 1:
         call makeuser
-    if old user
-        login
+    else if user = 2:
+        call login
 }
 
 def MakeTicket
-    nature of ticket
-        1, finacial
-        2, technical
-        3, other
-        
-    please descibe your problem
+    print ("Select the number that matchs the nature of your ticket")
+    print ("1, Finacial")
+    print("2, Technical")
+    print("3, Other")
+    nature = get_int(1,3) 
+        add nature to ticket
+
+    summary = input("give a short summary of your problem")
+        add summary to ticket
     
     
     ticket number assigned
-    emplyee assigned ticket
+    
+    if ticket number /2 = 0:
+        employee = employee1
+    else:
+        employee = employee2
+    add emplyee to ticket
 
-def new user
-    enter username
+def newuser
+    while usernameOk = False
+    username = input("Enter username")
         Check if already in use
-    enter password
-    enter player ID
+        if yes 
+            usernameOk = True
+        
+        
+    password = input("Enter password")
+    playerid = input("enter player ID")
     
     add user to file
     
-    1, exit program
-    2, make ticket now
+    print("If you want to exit press 1, if you want to make a ticket now press 2")
+    choice = get_int(1,2)
+    if choice = 1:
+        print("Your account has been made")
+        return exit = True
+    else:
+        MakeTicket()
 
 
 def userlogin
+    While Exit = False:
+    
+    username = input("Enter your Username")
+    password = input("Enter yout Password")
 
-if guest
-    1, make new ticket
-    2, check status of tickets
+    if their is a match return flagtype
 
-if employee1
-    1, check assigned tickets
-        1, delete tickets
-        2, edit tickets
-    2, check guestusers
-        1,delete guestusers
-        2,edit guestusers
+    if guest:
+        print("Select the number of your choice")
+        print("1, make new ticket")
+        print("2, check status of tickets")
+        print("3, Exit")
+    choice = get_int(1,3)
+    if choice = 1:
+        MakeTicket()
+    else if choice = 2:
+        call ticket status
+    else:
+        Exit = True
 
-if employee2
-    1, check assigned tickets
-        1, delete tickets
-        2, edit tickets
-    2, check guestusers
-        1,delete guestusers
-        2,edit guestusers
-        
-if owner
-    1, check tickets
-        1, delete tickets
-        2, edit tickets
-    2, check guestusers
-        1,add guestusers
-        2,delete guestusers
-        3,edit guestusers
-    3, check employees
-        1, delete employees
-        2, edit employees
-        
-        
+    if employee1:
+        print("Select the number of your choice")
+        print("1, check assigned tickets")
+        print("2, check guestusers")
+        print("3, Exit")
+        choice = get_int(1,3)
+        if choice = 1:
+            displaytickets
+        else if choice = 2:
+            displayguestusers
+        else:
+            Exit = True
+     
+     if employee2:
+        print("Select the number of your choice")
+        print("1, check assigned tickets")
+        print("2, check guestusers")
+        print("3, Exit")
+        choice = get_int(1,3)
+        if choice = 1:
+            displaytickets
+        else if choice = 2:
+            displayguestusers
+        else Exit = True
+    if owner
+        print("Select the number of your choice")
+        print("1, check tickets")
+        print("2, check guestusers")
+        print("3, check employees")
+        print("4 Exit")
+        choice = get_int(1,4)
+        if choice = 1:
+            displaytickets
+        else if choice = 2:
+            displayguestusers
+        else if choice =3:
+            display employees
+        else:
+            Exit = True
+       
