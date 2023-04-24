@@ -1,7 +1,6 @@
 import json
 from classes import user_classes
 
-
 def get_int(a_min_value, a_max_value):
     proper_input = False 
 
@@ -29,17 +28,19 @@ def get_int(a_min_value, a_max_value):
         print(f'Value error - expected number between {a_min_value} and {a_max_value}, was given {user_float} instead.')
 
 
-def log_in(a_file, a_username, a_password):
-
-    json_index = -1
+def log_in(a_file, a_username, a_password): 
     json_data = json.load(a_file)
 
-    if a_username in json_data:
-        if a_password == json_data[a_username]["password"]:
-            json_index = list(json_data.keys()).index(a_username)
+    for candidate_user in json_data["users"]:
+        if candidate_user["username"] == a_username and candidate_user["password"] == a_password:
+            return user_classes.user(candidate_user["username"], candidate_user["password"], candidate_user["active_ticket"])
 
-    return json_index
+    return
 
 
-def manage_ticket(a_ticket, a_employee):
-    a_ticket
+def append_to_file(a_file, a_field, a_data):
+    with open(a_file,'r+') as f:
+        json_data = json.load(f)
+        json_data[a_field].append(a_data)
+        f.seek(0)
+        json.dump(json_data, f)
