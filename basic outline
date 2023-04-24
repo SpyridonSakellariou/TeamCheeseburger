@@ -7,21 +7,21 @@
 
 """This function checks if the user already has an account"""
 def main():
-    print("Wellcome to the ticketing system for SuperGalactic Racing Games")
-    print("If you are a new user Press 1, if you have an account press 2")
-    print ("Select the number that matchs the nature of your ticket")
-    print ("1, New User")
-    print("2, User Account Login")
-    print("3, Employee Account Login")
-    print("4, Manager Account Login")
-    print("5, Exit")
-    user = get_int(1,4)
-    if user == 1:
-        newuser()
-    elif user == 5:
-        print("Exit")
-    else:
-        userlogin(user)
+    while True:
+        print("Wellcome to the ticketing system for SuperGalactic Racing Games")
+        print("Select the number that matchs your choice")
+        print("1, New User")
+        print("2, User Account Login")
+        print("3, Employee Account Login")
+        print("4, Manager Account Login")
+        print("5, Exit")
+        user = get_int(1,5)
+        if user == 1:
+            newuser()
+        elif user == 5:
+            print("Exit")
+        else:
+            userlogin(user)
 
 
 """This function allows a user to create a ticket"""
@@ -130,3 +130,4 @@ def userlogin():
             else:
                 break
             
+     
