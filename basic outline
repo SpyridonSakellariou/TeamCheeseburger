@@ -1,115 +1,132 @@
 #include <stdio.h>
+#This class is the interface for the creation and managment of a ticketing system
+#Authors Tynan Orr, Sypridon Sakellariou
+#Date: March 31th, 2023
+#Last Update: April 24th
 
-int main()
-{
+
+"""This function checks if the user already has an account"""
+def main():
+    print("Wellcome to the ticketing system for SuperGalactic Racing Games")
     print("If you are a new user Press 1, if you have an account press 2")
-    user = get_int(1,2)
-    if user = 1:
-        call makeuser
-    else if user = 2:
-        call login
-}
+    print ("Select the number that matchs the nature of your ticket")
+    print ("1, New User")
+    print("2, User Account Login")
+    print("3, Employee Account Login")
+    print("4, Manager Account Login")
+    print("5, Exit")
+    user = get_int(1,4)
+    if user == 1:
+        newuser()
+    elif user == 5:
+        print("Exit")
+    else:
+        userlogin(user)
 
-def MakeTicket
+
+"""This function allows a user to create a ticket"""
+def MakeTicket():
     print ("Select the number that matchs the nature of your ticket")
     print ("1, Finacial")
     print("2, Technical")
     print("3, Other")
     nature = get_int(1,3) 
-        add nature to ticket
+       # add nature to ticket
 
     summary = input("give a short summary of your problem")
-        add summary to ticket
+       # add summary to ticket
     
     
-    ticket number assigned
+    #ticket number assigned
     
-    if ticket number /2 = 0:
-        employee = employee1
-    else:
-        employee = employee2
-    add emplyee to ticket
+   # if ticket number /2 == 0:
+   #     employee = employee1
+   # else:
+   #     employee = employee2
+   # add emplyee to ticket
 
-def newuser
-    while usernameOk = False
-    username = input("Enter username")
-        Check if already in use
-        if yes 
-            usernameOk = True
+"""This function allows a new user to create an account """
+def newuser():
+    while usernameOk == False:
+        username = input("Enter username")
+    #    Check if already in use
+    #    if yes 
+    #        usernameOk = True
         
         
     password = input("Enter password")
     playerid = input("enter player ID")
     
-    add user to file
+    #add user to file
     
     print("If you want to exit press 1, if you want to make a ticket now press 2")
     choice = get_int(1,2)
-    if choice = 1:
+    if choice == 1:
         print("Your account has been made")
-        return exit = True
+        Exit=True
+
     else:
         MakeTicket()
 
-
-def userlogin
-    While Exit = False:
+"""This function allows a user to login to their account"""
+def userlogin():
+    while True:
     
-    username = input("Enter your Username")
-    password = input("Enter yout Password")
-
-    if their is a match return flagtype
-
-    if guest:
-        print("Select the number of your choice")
-        print("1, make new ticket")
-        print("2, check status of tickets")
-        print("3, Exit")
-    choice = get_int(1,3)
-    if choice = 1:
-        MakeTicket()
-    else if choice = 2:
-        call ticket status
-    else:
-        Exit = True
-
-    if employee1:
-        print("Select the number of your choice")
-        print("1, check assigned tickets")
-        print("2, check guestusers")
-        print("3, Exit")
+        username = input("Enter your Username")
+        password = input("Enter yout Password")
+    
+        #if their is a match return flagtype
+    
+        if guest:
+            print("Select the number of your choice")
+            print("1, make new ticket")
+            print("2, check status of tickets")
+            print("3, Exit")
         choice = get_int(1,3)
-        if choice = 1:
-            displaytickets
-        else if choice = 2:
-            displayguestusers
+        if choice == 1:
+            MakeTicket()
+        elif choice == 2:
+            print("call ticket status")
         else:
             Exit = True
-     
-     if employee2:
-        print("Select the number of your choice")
-        print("1, check assigned tickets")
-        print("2, check guestusers")
-        print("3, Exit")
-        choice = get_int(1,3)
-        if choice = 1:
-            displaytickets
-        else if choice = 2:
-            displayguestusers
-        else Exit = True
-    if owner
-        print("Select the number of your choice")
-        print("1, check tickets")
-        print("2, check guestusers")
-        print("3, check employees")
-        print("4 Exit")
-        choice = get_int(1,4)
-        if choice = 1:
-            displaytickets
-        else if choice = 2:
-            displayguestusers
-        else if choice =3:
-            display employees
-        else:
-            Exit = True
-       
+    
+        if employee1:
+            print("Select the number of your choice")
+            print("1, check assigned tickets")
+            print("2, check guestusers")
+            print("3, Exit")
+            choice = get_int(1,3)
+            if choice == 1:
+               print("displaytickets")
+            elif choice == 2:
+                print("displayguestusers")
+            else:
+                Exit = True
+         
+        if employee2:
+            print("Select the number of your choice")
+            print("1, check assigned tickets")
+            print("2, check guestusers")
+            print("3, Exit")
+            choice = get_int(1,3)
+            if choice == 1:
+                displaytickets
+            elif choice == 2:
+                displayguestusers
+            else: break
+        if manager:
+            print("Select the number of your choice")
+            print("1, check tickets")
+            print("2, check guestusers")
+            print("3, check employees")
+            print("4 Exit")
+            choice = get_int(1,4)
+            if choice == 1:
+                print("displaytickets")
+            elif choice == 2:
+                print("displayguestusers")
+            elif choice == 3:
+                print("display employees")
+            else:
+                break
+            
