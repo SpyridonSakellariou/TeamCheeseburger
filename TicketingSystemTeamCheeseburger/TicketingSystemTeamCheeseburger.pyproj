@@ -21,6 +21,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="classes\__innit__.py" />
+    <Compile Include="classes\user_classes.py" />
     <Compile Include="utility_functions\filesystem_creator.py" />
     <Compile Include="utility_functions\json_parser.py" />
     <Compile Include="utility_functions\generic_functions.py" />
@@ -30,6 +32,7 @@
     <Compile Include="TicketingSystemTeamCheeseburger.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="classes\" />
     <Folder Include="utility_functions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

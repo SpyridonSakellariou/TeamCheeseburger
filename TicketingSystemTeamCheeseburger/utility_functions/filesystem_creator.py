@@ -1,28 +1,58 @@
 import os
 import json
 
+default_user_contents = {
+
+    "user_1": {
+        "password":"user1",
+        "active_ticket_index":0
+    }, 
+    "user_2": {
+        "password":"user2",
+        "active_ticket_index":1
+    }   
+}
 
 default_admin_contents = {
     "admin_1": {
-        "username":"admin",
         "password":"admin"
     },
     "admin_2" : {
-        "username":"admin2",
         "password":"admin2"
     }
 }
 
 default_employee_contents = {
     "employee_1": {
-        "username":"employee",
-        "password":"employee2",
-        "role":"support_in_game"
+        "password":"employee1",
+        "role":"support_in_game",
+        "tickets":[
+            2,3,4,5
+        ]
     },
     "employee_2" : {
-        "username":"employee2",
         "password":"employee2",
-        "role":"support_monetary"
+        "role":"support_monetary",
+        "tickets":[
+            1
+        ]
+    }
+}
+
+default_tickets_contents = {
+    "Cannot log in pls hlp": {
+        "submitting_user_index":0,
+        "priority":0,
+        "nature":1,
+        "content":"...",
+        "status":"ongoing"
+    },
+    "Cannot purchase things from the cosmetics store": {
+        "submitting_user_index":1,
+        "priority":1,
+        "nature":2,
+        "content":"...",
+        "status":"ongoing"
     }
 }
 
@@ -46,9 +76,10 @@ def check_users_filesystem(a_working_directory, a_result_list_directories, a_res
     users_directory = a_working_directory + '\\Users\\'
 
     users_directory_administrator = users_directory + 'Administrator.json'
-    users_directory_owner = users_directory + 'Owner.json'
+    users_directory_employee = users_directory + 'Employee.json'
+    users_directory_user = users_directory + 'User.json'
 
-    users_directory_files = [users_directory_administrator, users_directory_owner]
+    users_directory_files = [users_directory_administrator, users_directory_employee, users_directory_user]
     users_directory_directories = [users_directory]
 
     
@@ -75,8 +106,24 @@ def check_logs_filesystem(a_working_directory, a_result_list_directories, a_resu
     sublist_handler(users_directory_files, a_result_list_files)
     sublist_handler(users_directory_directories, a_result_list_directories)
 
+"""Creates the necessary files for the tickets directory if it doesn't exist"""
+def check_tickets_filesystem(a_working_directory, a_result_list_directories, a_result_list_files):
+    tickets_directory = a_working_directory + '\\Tickets\\'
+    tickets_holder = tickets_directory + 'Tickets.json'
 
-def check_filesystem():
+    tickets_directory_files = [tickets_holder]
+    tickets_directory_directories = [tickets_directory]
+
+    sublist_handler(tickets_directory_files, a_result_list_files)
+    sublist_handler(tickets_directory_directories, a_result_list_directories)
+
+
+def clean_folders(a_working_directory, a_directory):
+    for directory in a_directory:
+        shutil.rmtree(directory)
+
+
+def check_filesystem(a_repair):
 #Checks to see if the filesystem is intact. Creates necessary directories and files.
     
 
@@ -91,30 +138,38 @@ def check_filesystem():
     logs_files = [] 
     check_logs_filesystem(working_directory, logs_directories, logs_files)
 
+    tickets_directories = []
+    tickets_files = []
+    check_tickets_filesystem(working_directory, tickets_directories, tickets_files)
 
     all_directories = [] 
-    sublist_handler([users_directories, logs_directories], all_directories)
+    sublist_handler([users_directories, logs_directories, tickets_directories], all_directories)
 
     all_files = [] 
-    sublist_handler([users_files, logs_files], all_files)
+    sublist_handler([users_files, tickets_files, logs_files], all_files)
     
+    should_sanitize = False
 
-    #Directory creation here.
-    for candidate_directory in all_directories:
-        if not os.path.exists(candidate_directory):
-            os.mkdir(candidate_directory)
+    if a_repair:
+        should_sanitize = True
+    else:
+        #Directory creation here.
+        for candidate_directory in all_directories:
+            if not os.path.exists(candidate_directory):
+                os.mkdir(candidate_directory)
+                should_sanitize = True
 
-
-    #File creation here.
-    for candidate_file in all_files:
-        if not os.path.exists(candidate_file):
-            with open(candidate_file, 'w'):
-                pass
+        #File creation here.
+        for candidate_file in all_files:
+            if not os.path.exists(candidate_file):
+                with open(candidate_file, 'w'):
+                    should_sanitize = True
 
     #Sanitize entries
-    json_data_list = [default_admin_contents, default_employee_contents]
-    i = 0
-    for entry in json_data_list:
-        with open(all_files[i], 'w') as f:
-            json.dump(entry, f)
-            i += 1
+    if should_sanitize == True:
+        json_data_list = [default_admin_contents, default_employee_contents, default_user_contents, default_tickets_contents]
+        i = 0
+        for entry in json_data_list:
+            with open(all_files[i], 'w') as f:
+                json.dump(entry, f)
+                i += 1

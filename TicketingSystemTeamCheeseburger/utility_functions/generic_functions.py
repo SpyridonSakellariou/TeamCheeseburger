@@ -1,3 +1,7 @@
+import json
+from classes import user_classes
+
+
 def get_int(a_min_value, a_max_value):
     proper_input = False 
 
@@ -23,3 +27,19 @@ def get_int(a_min_value, a_max_value):
             return int(user_float)
 
         print(f'Value error - expected number between {a_min_value} and {a_max_value}, was given {user_float} instead.')
+
+
+def log_in(a_file, a_username, a_password):
+
+    json_index = -1
+    json_data = json.load(a_file)
+
+    if a_username in json_data:
+        if a_password == json_data[a_username]["password"]:
+            json_index = list(json_data.keys()).index(a_username)
+
+    return json_index
+
+
+def manage_ticket(a_ticket, a_employee):
+    a_ticket
