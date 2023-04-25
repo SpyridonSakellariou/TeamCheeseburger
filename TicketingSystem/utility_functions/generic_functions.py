@@ -1,8 +1,3 @@
-#This function ensures that the given value is an interger number in the right range.
-#Authors Tynan Orr, Sypridon Sakellariou
-#Date: March 31th, 2023
-#Last Update: April 25th
-
 def get_int(a_min_value, a_max_value):
     proper_input = False 
 
@@ -29,3 +24,13 @@ def get_int(a_min_value, a_max_value):
 
         print(f'Value error - expected number between {a_min_value} and {a_max_value}, was given {user_float} instead.')
 
+def get_str(a_list_of_responses):
+    proper_input = False
+
+    while not proper_input:      
+        user_input = input("Please enter your text here: ")
+
+        if user_input in a_list_of_responses:
+            return user_input
+
+        print("Error: Value not in list.")

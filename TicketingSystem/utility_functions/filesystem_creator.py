@@ -1,8 +1,3 @@
-#This class creates and manages the files
-#Authors Tynan Orr, Sypridon Sakellariou
-#Date: March 31th, 2023
-#Last Update: April 25th
-
 import os
 from utility_functions import json_operations 
 
@@ -12,13 +7,15 @@ default_user_contents = {
             "username":"user_1",
             "password":"user1",
             "tickets":[
-            ]
+            ],
+            "role":"User"
         }, 
         {
             "username":"user_2",
             "password":"user2",
             "tickets":[
-            ]
+            ],
+            "role":"User"
         }
     ]
 }
@@ -28,16 +25,16 @@ default_employee_contents = {
         {
             "username":"employee_1",
             "password":"employee1",
-            "role":"support_in_game",
             "tickets":[
-            ]
+            ],
+            "role":"Employee"
         },
         {
             "username":"employee_2",
             "password":"employee2",
-            "role":"support_monetary",
             "tickets":[
-            ]
+            ],
+            "role":"Employee"
         }
     ]
 }

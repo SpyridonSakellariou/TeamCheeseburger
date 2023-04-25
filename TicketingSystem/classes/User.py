@@ -3,11 +3,7 @@ from utility_functions import generic_functions
 from utility_functions import json_operations
 
 """User class. Used extensively throughout the program, it is used to substantiate
-a user whose attributes are inherited from the Application_User class.
-Authors Tynan Orr, Sypridon Sakellariou
-Date: March 31th, 2023
-Last Update: April 25th"""
-
+a user whose attributes are inherited from the Application_User class."""
 class User(Application_User.Application_User):
     def __init__(self, username, password, tickets, tickets_directory):
         super().__init__(username, password, tickets, tickets_directory)

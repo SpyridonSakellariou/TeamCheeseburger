@@ -1,7 +1,3 @@
-#This class manages all the json operations
-#Authors Tynan Orr, Sypridon Sakellariou
-#Date: March 31th, 2023
-#Last Update: April 25th
 import json
 
 def append_to_file(a_file, a_field, a_data):
@@ -37,6 +33,7 @@ def get_ticket_data_by_index(a_file, a_index):
                 "title":                title,
                 "submitting_user_index":submitting_user_name,
                 "priority":             priority,
+                "nature":               nature,
                 "content":              content,
                 "status":               status
            }
@@ -47,6 +44,7 @@ def get_ticket_data_by_name(a_file, a_user_username, a_name):
 
     for ticket in json_data["tickets"]:
         if ticket["title"] == a_name and ticket["submitting_user_name"] == a_user_username:
+            print("Successfully found ticket")
             return {
                         "title":                ticket["title"],
                         "submitting_user_index":ticket["submitting_user_name"],
@@ -66,7 +64,8 @@ def get_user_data_by_name(a_file, a_field, a_username):
             return {
                         "username":user["username"],
                         "password":user["password"],
-                        "tickets": user["tickets"]
+                        "tickets": user["tickets"],
+                        "role":    user["role"]
                    }
 
     return
@@ -78,9 +77,32 @@ def get_tickets_by_username(a_file, a_user_username):
 
     for ticket in json_data["tickets"]:
         if ticket["submitting_user_name"] == a_user_username:
-            response.append(ticket["title"])
+            response.append(ticket)
 
     return response
+
+
+def get_tickets_by_employee(a_file, a_user_username):
+    json_data = json.load(a_file)
+    response = []
+
+    for ticket in json_data["tickets"]:
+        if ticket["managing_employee"] == a_user_username:
+            response.append(ticket)
+
+    return response
+
+
+def set_ticket_claimed(a_path, a_ticket_name, a_ticket_user, a_ticket_employee):
+    with open(a_path, "r+") as f:
+        json_data = json.load(f)
+
+        for ticket in json_data["tickets"]:
+            if ticket["title"] == a_ticket_name and ticket["submitting_user_name"] == a_ticket_user:
+                ticket["managing_employee"] = a_ticket_employee
+                ticket["status"] = "claimed"
+        f.seek(0)
+        json.dump(json_data, f)
 
 
 def log_in(a_working_directory):
@@ -89,29 +111,29 @@ def log_in(a_working_directory):
     employees_path = a_working_directory + '\\Users\\Employee.json'
 
     while logging_in:
-        conflicting_username = True
+        conflicting_username = False
         user_level = "guest"
         user_username = "None"
         user_password = "None"
 
-        while conflicting_username:
+        while not conflicting_username:
             user_choice = input("Please provide a username: ")
             user_username = user_choice
+            user_level = "Guest"
 
             with open(users_path) as f:
                 temp_bool = get_username_exists(f, "users", user_choice)
-                user_level = "users"
 
-                if conflicting_username:
-                        break
+                if temp_bool:
+                    user_level = "users"
+                    break
 
-            if not conflicting_username:
-                with open(employees_path) as f:
-                    temp_bool = get_username_exists(f, "employees", user_choice)
+            with open(employees_path) as f:
+                temp_bool = get_username_exists(f, "employees", user_choice)
+
+                if temp_bool:
                     user_level = "employees"
-
-                    if conflicting_username:
-                        break
+                    break
             
                     
             if not temp_bool:
@@ -121,15 +143,16 @@ def log_in(a_working_directory):
         appropriate_password = False
 
         while not appropriate_password:
-            user_choice = input("Please provide a password: ")
+            user_password = input("Please provide a password: ")
 
             if user_level == "users":
                 with open(users_path) as f:
-                    response = check_credentials(f, "users", user_username, user_choice)
+                    response = check_credentials(f, "users", user_username, user_password)
            
             else:
-                with open(users_path) as f:
-                    response = check_credentials(f, "employees", user_username, user_choice)
+                with open(employees_path) as f:
+                    response = check_credentials(f, "employees", user_username, user_password)
+            
 
             if response:
                 appropriate_password = response
@@ -137,8 +160,12 @@ def log_in(a_working_directory):
             else:
                 print("Incorrect password. Please try again. \n")
 
-    with open(users_path) as f:
-        return get_user_data_by_name(f, "users", user_username)
+    if user_level == "users":
+        with open(users_path) as f:
+            return get_user_data_by_name(f, "users", user_username)
+
+    with open(employees_path) as f:
+        return get_user_data_by_name(f, "employees", user_username)
 
 def check_credentials(a_file, a_field, a_username, a_password): 
     json_data = json.load(a_file)
@@ -154,6 +181,7 @@ def create_ticket(a_file, a_title, a_category, a_username, a_content):
                             "title":               a_title,
                             "category":            a_category,
                             "submitting_user_name":a_username,
+                            "managing_employee"   :"None",
                             "priority":            0,
                             "content":             a_content,
                             "status":              "ongoing"

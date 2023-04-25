@@ -36,7 +36,7 @@ def create_new_user(a_working_directory):
 
     json_operations.append_to_file(a_working_directory + '\\Users\\User.json', "users", user_data)
 
-    return temp_user
+    return user_data
 
 
 def create_secondary_menu(a_user_credentials):
@@ -61,13 +61,16 @@ def main():
 
         elif user_input == 2:
             user = json_operations.log_in(working_directory)
-    
         else:
             continue_menu = False
             continue
 
-        temp_user = User.User(user["username"],  user["password"], user["tickets"], working_directory + '\\Tickets\\Tickets.json')
-        temp_user.Show_Menu()
+        if user["role"] == "User":
+            temp_user = User.User(user["username"], user["password"], user["tickets"], working_directory + '\\Tickets\\Tickets.json')
+            temp_user.Show_Menu()
+        else:
+            temp_employee = Employee.Employee(user["username"], user["password"], user["tickets"], working_directory + '\\Tickets\\Tickets.json')
+            temp_employee.Show_Menu()
 
 if __name__ == '__main__':
     main()
