@@ -1,3 +1,8 @@
+#This function ensures that the given value is an interger number in the right range.
+#Authors Tynan Orr, Sypridon Sakellariou
+#Date: March 31th, 2023
+#Last Update: April 25th
+
 def get_int(a_min_value, a_max_value):
     proper_input = False 
 
