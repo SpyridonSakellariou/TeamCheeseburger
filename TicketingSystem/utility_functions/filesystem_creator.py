@@ -1,3 +1,8 @@
+#This class creates and manages the files
+#Authors Tynan Orr, Sypridon Sakellariou
+#Date: March 31th, 2023
+#Last Update: April 25th
+
 import os
 from utility_functions import json_operations 
 
