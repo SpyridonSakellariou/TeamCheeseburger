@@ -1,3 +1,7 @@
+#This class fills the ticket object with its variables and returns it
+#Authors Tynan Orr, Sypridon Sakellariou
+#Date: March 31th, 2023
+#Last Update: April 25th
 class Ticket:
     def __init__(self, title, category, submitting_user_name, priority, content, status):
         self.title                = title
