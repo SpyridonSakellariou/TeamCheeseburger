@@ -1,3 +1,7 @@
+#This class manages all the json operations
+#Authors Tynan Orr, Sypridon Sakellariou
+#Date: March 31th, 2023
+#Last Update: April 25th
 import json
 
 def append_to_file(a_file, a_field, a_data):
